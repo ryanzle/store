@@ -1,0 +1,17 @@
+<table>
+  <% @cart.lineitems.each do|item| %>
+    <tr>
+      <td><%= item.quantity %> x</td>
+      <td><%= item.product.name %></td>
+      <td><%= number_to_currency(item.product.price) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan = "2">Total Price:</td>
+    <td><%= number_to_currency(@cart.total_price) %></td> 
+  </tr>
+</table>
+
+<%= button_to('Empty Cart', @cart, method: :delete, data: {confirm: "Do you want to empty your cart?"}) %>
+
+<%= button_to('Continue to Checkout', new_order_path, method: :get) %>

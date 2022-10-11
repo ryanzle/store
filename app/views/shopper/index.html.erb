@@ -1,0 +1,29 @@
+<% if notice %>
+<p id = "notice"><%= notice %></p>
+<% end %>
+
+<h1> Product Catalog </h1>
+
+<h4> Search by item name or description </h4>
+<h5> Note: I was unable to figure out how to get the search working due to some weird discrepancy with the field tags.
+I've left my code (commented out) along with my logic in the shopper_controller.rb file.</h5>
+<%= form_tag('/', method: "GET") do %>
+    <%= label_tag :search_by_name %>
+    <%= text_field_tag :search_name, params[:search_name]%>
+
+    <%= label_tag :search_desc %>
+    <%= text_field_tag :search_by_desc, params[:search_desc]%>
+    
+    <%= submit_tag ("Search") %>
+<% end %>
+
+<% @products.each do |product| %>
+    <div class = "entry">
+        <%= image_tag(product.image) %>
+        <h3><a href = "/products/<%= product.id%>"><%= product.name %> </a></h3>
+        <p><%= product.description %></p>
+        <p><%= number_to_currency(product.price) %></p>
+
+        <%= button_to("Add to cart", lineitems_path(product_id: product), class: "add_to_cart", remote: true) %>
+    </div>
+<% end %>

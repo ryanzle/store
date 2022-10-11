@@ -1,0 +1,22 @@
+<% if notice %>
+<p id = "notice" ><%= notice %></p>
+<% end %>
+
+<h3><%= @product.name %></h3>
+<%= image_tag(@product.image) %>
+<p><%= @product.description %></p>
+<p><%= number_to_currency(@product.price) %></p>
+
+<div>
+  <%= button_to("Add to cart", lineitems_path(product_id: @product), class: "add_to_cart", remote: true) %>
+  <br>
+  <%= link_to "Back to shop", shopper_path %>
+</div>
+<br>
+<div>
+  <% if session[:user_id]%>
+    <%= link_to "Back to products", products_path %> | 
+    <%= link_to "Edit this product", edit_product_path(@product) %>
+    <%= button_to "Destroy this product", @product, method: :delete %>
+  <% end %>
+</div>

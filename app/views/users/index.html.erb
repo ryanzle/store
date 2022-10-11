@@ -1,0 +1,15 @@
+<h1>Listing Users</h1>
+<%if notice%>
+<p id = "notice" ><%= notice %></p>
+<% end %>
+
+<div id="users">
+  <% @users.each do |user| %>
+    <%= render user %>
+    <p>
+      <%= link_to "Show this user", user %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user", new_user_path %>
